@@ -1,0 +1,870 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#06140e">
+<title>مركز مالك الأشتر</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+  --gold:#e9c96e;
+  --gold2:#fff0b2;
+  --green:#12d887;
+  --bg:#06140e;
+  --glass:rgba(255,255,255,.055);
+  --border:rgba(245,212,119,.22);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100vh;
+  font-family:'Cairo',sans-serif;
+  color:white;
+  background:
+    radial-gradient(ellipse at 50% 0%,#174b30 0%,transparent 55%),
+    linear-gradient(145deg,#061b11,#020906 75%);
+  overflow-x:hidden;
+}
+
+/* خلفية متحركة */
+
+.background-glow{
+  position:fixed;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  filter:blur(110px);
+  opacity:.16;
+  z-index:-1;
+  pointer-events:none;
+  animation:floatGlow 9s ease-in-out infinite alternate;
+}
+
+.glow-one{
+  background:#00ff91;
+  top:5%;
+  right:-180px;
+}
+
+.glow-two{
+  background:#e8b83f;
+  bottom:0;
+  left:-180px;
+  animation-delay:2s;
+}
+
+@keyframes floatGlow{
+  from{transform:translateY(-30px)}
+  to{transform:translateY(80px)}
+}
+
+/* شاشة الدخول */
+
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    radial-gradient(circle at center,#153c27,#04120b 65%);
+  transition:opacity .9s,visibility .9s;
+}
+
+#loader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.loader-content{
+  width:min(85%,370px);
+  text-align:center;
+}
+
+.loader-symbol{
+  width:100px;
+  height:100px;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--gold);
+  border-radius:30px;
+  background:rgba(255,255,255,.04);
+  box-shadow:0 0 30px #e9c96e30,inset 0 0 25px #e9c96e10;
+  animation:logoEntrance 1.4s ease both,logoGlow 3s infinite alternate;
+}
+
+.loader-symbol span{
+  font-size:44px;
+  font-weight:900;
+  color:var(--gold);
+  text-shadow:0 0 20px #e9c96e99;
+}
+
+@keyframes logoEntrance{
+  from{opacity:0;transform:scale(.5) rotate(-20deg)}
+  to{opacity:1;transform:scale(1) rotate(0)}
+}
+
+@keyframes logoGlow{
+  from{box-shadow:0 0 15px #e9c96e22}
+  to{box-shadow:0 0 40px #e9c96e66}
+}
+
+.loader-title{
+  margin-top:23px;
+  color:var(--gold);
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.loader-subtitle{
+  color:#a7c7b2;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.loader-line{
+  height:5px;
+  background:#ffffff15;
+  border-radius:20px;
+  margin-top:35px;
+  overflow:hidden;
+}
+
+.loader-progress{
+  height:100%;
+  width:0%;
+  border-radius:20px;
+  background:linear-gradient(90deg,#0bc879,#fff0a6);
+  box-shadow:0 0 20px var(--green);
+  transition:width .04s linear;
+}
+
+.loader-number{
+  color:var(--gold);
+  margin-top:13px;
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+/* الترحيب */
+
+.welcome{
+  position:fixed;
+  top:20px;
+  left:50%;
+  z-index:90;
+  width:min(92%,500px);
+  padding:17px;
+  text-align:center;
+  border:1px solid #e9c96e66;
+  border-radius:20px;
+  background:rgba(7,30,18,.9);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 10px 45px #0008,0 0 25px #e9c96e22;
+  transform:translate(-50%,-30px);
+  opacity:0;
+  visibility:hidden;
+  transition:.6s;
+}
+
+.welcome.show{
+  opacity:1;
+  visibility:visible;
+  transform:translate(-50%,0);
+}
+
+.welcome strong{
+  color:var(--gold);
+  font-size:18px;
+}
+
+/* المحتوى */
+
+main{
+  width:min(92%,1050px);
+  margin:auto;
+  padding:30px 0 45px;
+}
+
+/* الواجهة */
+
+.hero{
+  position:relative;
+  text-align:center;
+  padding:65px 15px 45px;
+  animation:heroIn 1.3s ease both;
+}
+
+@keyframes heroIn{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hero-icon{
+  width:82px;
+  height:82px;
+  margin:0 auto 22px;
+  display:grid;
+  place-items:center;
+  border:1px solid #e9c96e88;
+  border-radius:25px;
+  background:linear-gradient(145deg,#193c29,#07170e);
+  box-shadow:0 0 35px #e9c96e22,inset 0 0 20px #fff1;
+}
+
+.hero-icon span{
+  font-size:35px;
+  font-weight:900;
+  color:var(--gold);
+}
+
+.hero-label{
+  color:#9ac9ab;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-bottom:10px;
+}
+
+h1{
+  font-size:clamp(30px,7vw,53px);
+  font-weight:900;
+  color:var(--gold);
+  text-shadow:0 0 30px #e9c96e35;
+  line-height:1.5;
+}
+
+.hero-description{
+  color:#b6cfc0;
+  font-size:14px;
+  line-height:2;
+  margin:10px auto 0;
+  max-width:600px;
+}
+
+/* فاصل */
+
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin:15px 0 25px;
+}
+
+.section-title::before,
+.section-title::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#d9bc62aa);
+}
+
+.section-title::after{
+  background:linear-gradient(90deg,#d9bc62aa,transparent);
+}
+
+.section-title h2{
+  font-size:19px;
+  color:var(--gold2);
+  white-space:nowrap;
+}
+
+/* شبكة الحسابات */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+
+/* البطاقة */
+
+.card{
+  position:relative;
+  min-width:0;
+  padding:27px 19px 20px;
+  text-align:center;
+  border-radius:25px;
+  border:1px solid rgba(255,255,255,.12);
+
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.018));
+
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+
+  box-shadow:
+    0 15px 40px #0004,
+    inset 0 1px 0 #ffffff13;
+
+  overflow:hidden;
+
+  opacity:0;
+  transform:translateY(55px) scale(.93);
+  filter:blur(9px);
+
+  transition:
+    opacity .9s ease,
+    transform .9s cubic-bezier(.2,.8,.2,1),
+    filter .9s ease,
+    border-color .4s,
+    box-shadow .4s;
+}
+
+/* خط البطاقة */
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:12%;
+  width:76%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+/* تأثير ضوئي */
+
+.card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:#e9c96e;
+  filter:blur(100px);
+  opacity:0;
+  top:-100px;
+  right:-100px;
+  transition:.5s;
+  pointer-events:none;
+}
+
+.card.show-card{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+
+.card.show-card::after{
+  opacity:.09;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:#e9c96e99;
+  box-shadow:
+    0 20px 45px #0006,
+    0 0 25px #e9c96e20,
+    inset 0 1px 0 #ffffff22;
+}
+
+/* دائرة الأيقونة */
+
+.icon-box{
+  width:75px;
+  height:75px;
+  margin:0 auto 17px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  border-radius:23px;
+
+  background:linear-gradient(145deg,#173c29,#07170e);
+  border:1px solid #e9c96e77;
+
+  box-shadow:
+    0 0 20px #e9c96e20,
+    inset 0 0 18px #e9c96e12;
+
+  transition:.4s;
+}
+
+.card:hover .icon-box{
+  transform:translateY(-4px) rotate(-4deg);
+  box-shadow:0 0 30px #e9c96e55;
+}
+
+.icon-box svg{
+  width:35px;
+  height:35px;
+  fill:none;
+  stroke:var(--gold);
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.card h3{
+  font-size:21px;
+  font-weight:900;
+  color:#fff;
+  margin-bottom:4px;
+}
+
+.card p{
+  font-size:12px;
+  color:#a9c5b3;
+  margin-bottom:20px;
+}
+
+/* الأزرار */
+
+.open-btn{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding:13px 10px;
+  border-radius:15px;
+  text-decoration:none;
+
+  color:#132015;
+  font-weight:900;
+  font-size:14px;
+
+  background:linear-gradient(110deg,#d8b44e,#fff1b5,#d8b44e);
+  background-size:200% 100%;
+
+  box-shadow:0 5px 20px #e9c96e22;
+
+  transition:.35s;
+  overflow:hidden;
+}
+
+.open-btn:hover{
+  background-position:100% 0;
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px #e9c96e55;
+}
+
+.open-btn:active{
+  transform:scale(.96);
+}
+
+.open-btn span{
+  font-size:19px;
+}
+
+/* أسفل الصفحة */
+
+.bottom-note{
+  text-align:center;
+  margin:35px 0 5px;
+  color:#8eaa99;
+  font-size:12px;
+  line-height:2;
+}
+
+footer{
+  text-align:center;
+  padding:25px 10px;
+  color:#779584;
+  font-size:12px;
+  border-top:1px solid #ffffff0b;
+}
+
+footer strong{
+  color:var(--gold);
+}
+
+/* الهاتف */
+
+@media(max-width:600px){
+
+  main{
+    width:92%;
+    padding-top:15px;
+  }
+
+  .hero{
+    padding:48px 5px 35px;
+  }
+
+  .cards{
+    gap:12px;
+  }
+
+  .card{
+    padding:23px 10px 13px;
+    border-radius:19px;
+  }
+
+  .icon-box{
+    width:59px;
+    height:59px;
+    border-radius:19px;
+    margin-bottom:12px;
+  }
+
+  .icon-box svg{
+    width:28px;
+    height:28px;
+  }
+
+  .card h3{
+    font-size:17px;
+  }
+
+  .card p{
+    font-size:10px;
+    margin-bottom:15px;
+  }
+
+  .open-btn{
+    font-size:11px;
+    padding:11px 5px;
+    border-radius:12px;
+  }
+
+  .section-title h2{
+    font-size:16px;
+  }
+
+  .hero-description{
+    font-size:12px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+
+  .card{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+<!-- شاشة الدخول -->
+
+<div id="loader">
+
+  <div class="loader-content">
+
+    <div class="loader-symbol">
+      <span>م</span>
+    </div>
+
+    <div class="loader-title">
+      مركز مالك الأشتر
+    </div>
+
+    <div class="loader-subtitle">
+      أهلاً بكم في منصاتنا الرسمية
+    </div>
+
+    <div class="loader-line">
+      <div class="loader-progress" id="progress"></div>
+    </div>
+
+    <div class="loader-number">
+      <span id="number">0</span>%
+    </div>
+
+  </div>
+
+</div>
+
+<!-- الترحيب -->
+
+<div class="welcome" id="welcome">
+
+  <strong>أهلاً بكم في مركز مالك الأشتر</strong>
+
+  <div style="color:#c0d6c8;font-size:12px;margin-top:5px">
+    نسعد بزيارتكم ونرحب بتواصلكم معنا
+  </div>
+
+</div>
+
+<main>
+
+  <!-- الواجهة الرئيسية -->
+
+  <header class="hero">
+
+    <div class="hero-icon">
+      <span>م</span>
+    </div>
+
+    <div class="hero-label">
+      OFFICIAL PLATFORMS
+    </div>
+
+    <h1>مركز مالك الأشتر</h1>
+
+    <p class="hero-description">
+      مرحباً بكم في منصاتنا الرسمية.
+      يمكنكم متابعتنا والتواصل معنا من خلال الحسابات التالية.
+    </p>
+
+  </header>
+
+  <div class="section-title">
+    <h2>حسابات التواصل الرسمية</h2>
+  </div>
+
+  <section class="cards">
+
+    <!-- فيسبوك -->
+
+    <article class="card">
+
+      <div class="icon-box">
+
+        <svg viewBox="0 0 24 24">
+          <path d="M14 8h3V4h-3a5 5 0 0 0-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9a1 1 0 0 1 1-1z"/>
+        </svg>
+
+      </div>
+
+      <h3>فيسبوك</h3>
+
+      <p>تابعوا صفحتنا الرسمية</p>
+
+      <a
+        class="open-btn"
+        href="https://www.facebook.com/share/1HU8rHZYoq/?mibextid=wwXIfr"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>↗</span>
+        زيارة الحساب
+      </a>
+
+    </article>
+
+    <!-- تيك توك -->
+
+    <article class="card">
+
+      <div class="icon-box">
+
+        <svg viewBox="0 0 24 24">
+          <path d="M14 3v11.2a4 4 0 1 1-3-3.87V7.2c-2.5-.3-5 1.5-5 4.3a7 7 0 1 0 12-4.95V3z"/>
+          <path d="M14 3c1 2 2.5 3 5 3"/>
+        </svg>
+
+      </div>
+
+      <h3>تيك توك</h3>
+
+      <p>شاهدوا أحدث مقاطعنا</p>
+
+      <a
+        class="open-btn"
+        href="https://www.tiktok.com/@313_d13"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>↗</span>
+        زيارة الحساب
+      </a>
+
+    </article>
+
+    <!-- إنستغرام -->
+
+    <article class="card">
+
+      <div class="icon-box">
+
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M17.5 6.5h.01"/>
+        </svg>
+
+      </div>
+
+      <h3>إنستغرام</h3>
+
+      <p>تابعوا صورنا ومنشوراتنا</p>
+
+      <a
+        class="open-btn"
+        href="https://www.instagram.com/alofaa20/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>↗</span>
+        زيارة الحساب
+      </a>
+
+    </article>
+
+    <!-- واتساب -->
+
+    <article class="card">
+
+      <div class="icon-box">
+
+        <svg viewBox="0 0 24 24">
+          <path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.2A8 8 0 1 1 20 11.5z"/>
+          <path d="M9 8.5c.5 2.5 2 4 4.5 5l1.2-1.2 2 1c-.2 1.5-1.2 2.2-2.7 2-3.8-.7-6.5-3.4-7.2-7.2-.2-1.5.5-2.5 2-2.7l1 2z"/>
+        </svg>
+
+      </div>
+
+      <h3>واتساب</h3>
+
+      <p>تواصلوا معنا مباشرة</p>
+
+      <a
+        class="open-btn"
+        href="https://wa.me/9647713370473"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>↗</span>
+        بدء المحادثة
+      </a>
+
+    </article>
+
+  </section>
+
+  <div class="bottom-note">
+    نسعد بمتابعتكم وتواصلكم معنا عبر منصاتنا الرسمية
+  </div>
+
+</main>
+
+<footer>
+  جميع الحقوق محفوظة ©
+  <strong>مركز مالك الأشتر</strong>
+  <span id="year"></span>
+</footer>
+
+<script>
+
+/* عداد التحميل */
+
+const loader = document.getElementById("loader");
+const progress = document.getElementById("progress");
+const number = document.getElementById("number");
+const welcome = document.getElementById("welcome");
+
+let value = 0;
+
+const loading = setInterval(() => {
+
+  value++;
+
+  progress.style.width = value + "%";
+  number.textContent = value;
+
+  if(value >= 100){
+
+    clearInterval(loading);
+
+    setTimeout(() => {
+
+      loader.classList.add("hide");
+
+      welcome.classList.add("show");
+
+      setTimeout(() => {
+
+        welcome.classList.remove("show");
+
+      },5000);
+
+    },350);
+
+  }
+
+},25);
+
+
+/* السنة الحالية */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* ظهور البطاقات بالتدريج */
+
+const cards = document.querySelectorAll(".card");
+
+if("IntersectionObserver" in window){
+
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+
+        const card = entry.target;
+
+        const index = Array.from(cards).indexOf(card);
+
+        setTimeout(() => {
+
+          card.classList.add("show-card");
+
+        },index * 350);
+
+        observer.unobserve(card);
+
+      }
+
+    });
+
+  },{
+    threshold:0.12
+  });
+
+  cards.forEach(card => {
+    observer.observe(card);
+  });
+
+}else{
+
+  cards.forEach((card,index) => {
+
+    setTimeout(() => {
+
+      card.classList.add("show-card");
+
+    },index * 350);
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
